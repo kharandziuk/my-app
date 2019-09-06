@@ -1,6 +1,17 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 
+const validator = (values) =>{
+    const errors = {}
+    if(!values.firstName){
+      errors.firstName = "first name missing"
+    }
+    if(!values.lastName){
+      errors.lastName = "last name missing"
+    }
+  return errors
+  }
+
 const FormComponent = props => {
   const { handleSubmit, pristine, submitting } = props;
   return (
@@ -36,7 +47,8 @@ const FormComponent = props => {
 };
 
 const Form = reduxForm({
-  form: "Form" 
+  form: "Form",
+  validate: validator 
 })(FormComponent);
 
 export default Form;
